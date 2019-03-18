@@ -2,7 +2,7 @@
 // @name          AkunX
 // @description   Extends the functionality of Akun to enhance the experience
 // @author        Fiddlekins
-// @version       1.2.1
+// @version       1.2.2
 // @namespace     https://github.com/Fiddlekins/akun-x
 // @include       https://anonkun.com/*
 // @include       http://anonkun.com/*
@@ -2604,11 +2604,14 @@ var ChoiceReorder = function () {
 			var _this = this;
 
 			if (json['nt'] && json['nt'] === 'choice') {
+				var chapterNode = document.querySelector('article[data-id="' + json['_id'] + '"]');
 				if (json['closed']) {
 					// Make sure that we're not trying to apply changes before the native site does
 					setTimeout(function () {
-						_this._applyOrder(document.querySelector('article[data-id="' + json['_id'] + '"]'));
+						_this._applyOrder(chapterNode);
 					}, 1);
+				} else {
+					this._applyReopened(chapterNode);
 				}
 			}
 		}
@@ -2708,6 +2711,12 @@ var ChoiceReorder = function () {
 				}
 			}
 
+			delete tableNode.dataset.xkunXChoiceReorderApplied;
+		}
+	}, {
+		key: '_applyReopened',
+		value: function _applyReopened(chapterNode) {
+			var tableNode = chapterNode.querySelector('.poll');
 			delete tableNode.dataset.xkunXChoiceReorderApplied;
 		}
 	}], [{

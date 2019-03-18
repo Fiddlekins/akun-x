@@ -81,11 +81,14 @@ export default class ChoiceReorder {
 
 	_onChildChanged(json) {
 		if (json['nt'] && json['nt'] === 'choice') {
+			const chapterNode = document.querySelector(`article[data-id="${json['_id']}"]`);
 			if (json['closed']) {
 				// Make sure that we're not trying to apply changes before the native site does
 				setTimeout(() => {
-					this._applyOrder(document.querySelector(`article[data-id="${json['_id']}"]`));
+					this._applyOrder(chapterNode);
 				}, 1);
+			} else {
+				this._applyReopened(chapterNode)
 			}
 		}
 	}
@@ -135,6 +138,11 @@ export default class ChoiceReorder {
 		for (const { row } of optionData) {
 			ChoiceReorder._insertAfter(row, headerNode);
 		}
+		delete tableNode.dataset.xkunXChoiceReorderApplied;
+	}
+
+	_applyReopened(chapterNode) {
+		const tableNode = chapterNode.querySelector('.poll');
 		delete tableNode.dataset.xkunXChoiceReorderApplied;
 	}
 }

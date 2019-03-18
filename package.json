@@ -1,6 +1,6 @@
 {
   "name": "akun-x",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Extending the Akun experience",
   "main": "dest/akun-x.user.js",
   "scripts": {
