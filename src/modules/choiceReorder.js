@@ -83,9 +83,9 @@ export default class ChoiceReorder {
 		if (json['nt'] && json['nt'] === 'choice') {
 			if (json['closed']) {
 				// Make sure that we're not trying to apply changes before the native site does
-				setImmediate(() => {
+				setTimeout(() => {
 					this._applyOrder(document.querySelector(`article[data-id="${json['_id']}"]`));
-				});
+				}, 1);
 			}
 		}
 	}
@@ -93,6 +93,9 @@ export default class ChoiceReorder {
 	_applyOrder(chapterNode) {
 		const tableNode = chapterNode.querySelector('.poll');
 		if (tableNode.dataset.xkunXChoiceReorderApplied) {
+			return;
+		}
+		if (!tableNode.parentNode.classList.contains('closed')) {
 			return;
 		}
 		const optionData = [];
