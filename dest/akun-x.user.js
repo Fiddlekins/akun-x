@@ -2745,6 +2745,90 @@ var ChoiceReorder = function () {
 	return ChoiceReorder;
 }();
 
+var _settings$3;
+
+var MODULE_ID$6 = 'cssTweaks';
+
+var SETTING_IDS$7 = {
+	ENABLED: 'enabled',
+	UNFIX_IMAGE_HEIGHT: 'UNFIX_IMAGE_HEIGHT'
+};
+
+var DEFAULT_SETTINGS$7 = {
+	name: 'CSS tweaks',
+	id: MODULE_ID$6,
+	settings: (_settings$3 = {}, defineProperty(_settings$3, SETTING_IDS$7.ENABLED, {
+		name: 'Enabled',
+		description: 'Turn the CSS Tweaks module on or off.',
+		type: SETTING_TYPES.BOOLEAN,
+		value: false
+	}), defineProperty(_settings$3, SETTING_IDS$7.UNFIX_IMAGE_HEIGHT, {
+		name: 'Un-fix image height',
+		description: 'Override the thing that makes small images have big empty spaces around them. Can break "resume reading" autoscroll feature.',
+		type: SETTING_TYPES.BOOLEAN,
+		value: false
+	}), _settings$3)
+};
+
+var CssTweaks = function () {
+	function CssTweaks(core) {
+		classCallCheck(this, CssTweaks);
+
+		this._core = core;
+		this._settings = this._core.settings.addModule(DEFAULT_SETTINGS$7, this._onSettingsChanged.bind(this));
+		this._styleElement = document.createElement('style');
+		this._styleElement.id = 'akun-x-css-tweaks';
+		document.head.appendChild(this._styleElement);
+		if (this._settings[SETTING_IDS$7.ENABLED].value) {
+			this._enable();
+		}
+	}
+
+	createClass(CssTweaks, [{
+		key: '_onSettingsChanged',
+		value: function _onSettingsChanged(settingId) {
+			switch (settingId) {
+				case SETTING_IDS$7.ENABLED:
+					if (this._settings[SETTING_IDS$7.ENABLED].value) {
+						this._enable();
+					} else {
+						this._disable();
+					}
+					break;
+				default:
+					if (this._settings[SETTING_IDS$7.ENABLED].value) {
+						this._regenerateCurrentStyling();
+					}
+			}
+		}
+	}, {
+		key: '_enable',
+		value: function _enable() {
+			this._regenerateCurrentStyling();
+		}
+	}, {
+		key: '_disable',
+		value: function _disable() {
+			this._styleElement.innerHTML = '';
+		}
+	}, {
+		key: '_regenerateCurrentStyling',
+		value: function _regenerateCurrentStyling() {
+			var css = '';
+			if (this._settings[SETTING_IDS$7.UNFIX_IMAGE_HEIGHT].value) {
+				css += '.content .page-body .chapter .imgContainer { height: auto !important; }';
+			}
+			this._styleElement.innerHTML = css;
+		}
+	}], [{
+		key: 'id',
+		get: function get$$1() {
+			return MODULE_ID$6;
+		}
+	}]);
+	return CssTweaks;
+}();
+
 var core = new Core();
 
 core.addModule(AnonToggle);
@@ -2753,5 +2837,6 @@ core.addModule(ImageToggle);
 core.addModule(Linker);
 core.addModule(LiveImages);
 core.addModule(ChoiceReorder);
+core.addModule(CssTweaks);
 
 }());
