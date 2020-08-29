@@ -2751,7 +2751,10 @@ var MODULE_ID$6 = 'cssTweaks';
 
 var SETTING_IDS$7 = {
 	ENABLED: 'enabled',
-	UNFIX_IMAGE_HEIGHT: 'UNFIX_IMAGE_HEIGHT'
+	UNFIX_IMAGE_HEIGHT: 'UNFIX_IMAGE_HEIGHT',
+	HIDE_LEFT_SIDEBAR_BUTTON: 'HIDE_LEFT_SIDEBAR_BUTTON',
+	NORMALIZE_CHAT_FONT: 'NORMALIZE_CHAT_FONT',
+	HIDE_TWITTER_PROMPT: 'HIDE_TWITTER_PROMPT'
 };
 
 var DEFAULT_SETTINGS$7 = {
@@ -2767,6 +2770,21 @@ var DEFAULT_SETTINGS$7 = {
 		description: 'Override the thing that makes small images have big empty spaces around them. Can break "resume reading" autoscroll feature.',
 		type: SETTING_TYPES.BOOLEAN,
 		value: false
+	}), defineProperty(_settings$3, SETTING_IDS$7.HIDE_LEFT_SIDEBAR_BUTTON, {
+		name: 'Hide the "< Show" button',
+		description: 'Make the little floating thing disappear',
+		type: SETTING_TYPES.BOOLEAN,
+		value: true
+	}), defineProperty(_settings$3, SETTING_IDS$7.NORMALIZE_CHAT_FONT, {
+		name: 'Normalize chat font',
+		description: "Make the font in premium accounts' chat messages the same size as others",
+		type: SETTING_TYPES.BOOLEAN,
+		value: true
+	}), defineProperty(_settings$3, SETTING_IDS$7.HIDE_TWITTER_PROMPT, {
+		name: 'Hide the Twitter-like prompt',
+		description: "Remove the \"What's happening/Post your thoughts\" form in the top-right dropdown menu",
+		type: SETTING_TYPES.BOOLEAN,
+		value: true
 	}), _settings$3)
 };
 
@@ -2817,6 +2835,15 @@ var CssTweaks = function () {
 			var css = '';
 			if (this._settings[SETTING_IDS$7.UNFIX_IMAGE_HEIGHT].value) {
 				css += '.content .page-body .chapter .imgContainer { height: auto !important; }';
+			}
+			if (this._settings[SETTING_IDS$7.HIDE_LEFT_SIDEBAR_BUTTON].value) {
+				css += '.hideLeftSideBar { display: none !important; }';
+			}
+			if (this._settings[SETTING_IDS$7.NORMALIZE_CHAT_FONT].value) {
+				css += '.chatMsg[plan="1"] .message .fieldBody { font-size: inherit !important; }';
+			}
+			if (this._settings[SETTING_IDS$7.HIDE_TWITTER_PROMPT].value) {
+				css += '*[ng-controller="newsFeedPost"] { display: none !important; }';
 			}
 			this._styleElement.innerHTML = css;
 		}
