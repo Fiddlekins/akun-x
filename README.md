@@ -38,6 +38,12 @@ for the chapter
  - Adds the story cover image to the list of Live stories 
 #### Choice Reorder (courtesy of [Robouzou](https://github.com/Robouzou/akun-x))
  - With native Akun polls will display scrambled when the story is set to hidden poll mode even after the poll is closed and vote counts are visible. This fixes that
+#### CSS Tweaks
+A collection of toggleable alterations to how the site looks:
+ - Un-fix image height
+ - Hide the "< Show" button
+ - Normalize chat font
+ - Hide the Twitter-like prompt
 
 ## Building AkunX
 Do `npm run build` to rebuild the userscripts from the source.
