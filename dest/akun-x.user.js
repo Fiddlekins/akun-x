@@ -2754,7 +2754,7 @@ var SETTING_IDS$7 = {
 	UNFIX_IMAGE_HEIGHT: 'UNFIX_IMAGE_HEIGHT',
 	HIDE_LEFT_SIDEBAR_BUTTON: 'HIDE_LEFT_SIDEBAR_BUTTON',
 	NORMALIZE_CHAT_FONT: 'NORMALIZE_CHAT_FONT',
-	HIDE_TWITTER_PROMPT: 'HIDE_TWITTER_PROMPT'
+	HIDE_POST_YOUR_THOUGHTS: 'HIDE_POST_YOUR_THOUGHTS'
 };
 
 var DEFAULT_SETTINGS$7 = {
@@ -2774,14 +2774,14 @@ var DEFAULT_SETTINGS$7 = {
 		name: 'Hide the "< Show" button',
 		description: 'Make the little floating thing disappear',
 		type: SETTING_TYPES.BOOLEAN,
-		value: true
+		value: false
 	}), defineProperty(_settings$3, SETTING_IDS$7.NORMALIZE_CHAT_FONT, {
 		name: 'Normalize chat font',
 		description: "Make the font in premium accounts' chat messages the same size as others",
 		type: SETTING_TYPES.BOOLEAN,
 		value: true
-	}), defineProperty(_settings$3, SETTING_IDS$7.HIDE_TWITTER_PROMPT, {
-		name: 'Hide the Twitter-like prompt',
+	}), defineProperty(_settings$3, SETTING_IDS$7.HIDE_POST_YOUR_THOUGHTS, {
+		name: 'Hide the "Post your thoughts" prompt',
 		description: "Remove the \"What's happening/Post your thoughts\" form in the top-right dropdown menu",
 		type: SETTING_TYPES.BOOLEAN,
 		value: true
@@ -2842,7 +2842,7 @@ var CssTweaks = function () {
 			if (this._settings[SETTING_IDS$7.NORMALIZE_CHAT_FONT].value) {
 				css += '.chatMsg[plan="1"] .message .fieldBody { font-size: inherit !important; }';
 			}
-			if (this._settings[SETTING_IDS$7.HIDE_TWITTER_PROMPT].value) {
+			if (this._settings[SETTING_IDS$7.HIDE_POST_YOUR_THOUGHTS].value) {
 				css += '*[ng-controller="newsFeedPost"] { display: none !important; }';
 			}
 			this._styleElement.innerHTML = css;
