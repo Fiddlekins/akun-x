@@ -44,6 +44,7 @@ A collection of toggleable alterations to how the site looks:
  - Hide the "< Show" button
  - Normalize chat font
  - Hide the Twitter-like prompt
+ - Disable chat message cut-off
 
 ## Building AkunX
 Do `npm run build` to rebuild the userscripts from the source.

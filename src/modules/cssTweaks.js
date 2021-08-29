@@ -10,6 +10,7 @@ const SETTING_IDS = {
 	HIDE_LEFT_SIDEBAR_BUTTON: 'HIDE_LEFT_SIDEBAR_BUTTON',
 	NORMALIZE_CHAT_FONT: 'NORMALIZE_CHAT_FONT',
 	HIDE_POST_YOUR_THOUGHTS: 'HIDE_POST_YOUR_THOUGHTS',
+	MAKE_CHAT_LONG_AGAIN: 'MAKE_CHAT_LONG_AGAIN',
 };
 
 const DEFAULT_SETTINGS = {
@@ -43,6 +44,12 @@ const DEFAULT_SETTINGS = {
 		[SETTING_IDS.HIDE_POST_YOUR_THOUGHTS]: {
 			name: 'Hide the "Post your thoughts" prompt',
 			description: "Remove the \"What's happening/Post your thoughts\" form in the top-right dropdown menu",
+			type: SETTING_TYPES.BOOLEAN,
+			value: true
+		},
+		[SETTING_IDS.MAKE_CHAT_LONG_AGAIN]: {
+			name: 'Disable shortening of chat messages',
+			description: "Disable the feature that cuts chat messages off after 8 lines",
 			type: SETTING_TYPES.BOOLEAN,
 			value: true
 		},
@@ -102,6 +109,9 @@ export default class CssTweaks {
 		}
 		if (this._settings[SETTING_IDS.HIDE_POST_YOUR_THOUGHTS].value) {
 			css += '*[ng-controller="newsFeedPost"] { display: none !important; }';
+		}
+		if (this._settings[SETTING_IDS.MAKE_CHAT_LONG_AGAIN].value) {
+			css += '#mainChat .chatLog .message .fieldBody { display: inherit !important; }';
 		}
 		this._styleElement.innerHTML = css;
 	}
